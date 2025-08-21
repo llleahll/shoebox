@@ -1,7 +1,7 @@
 🛠 사용 기술
 
-Frontend: HTML, CSS, JavaScript, JSP, React (예시)
-Backend: Java, Spring, Spring Boot, MyBatis, JPA (프로젝트에 따라 기입)
-Database: MySQL
+Frontend: HTML, CSS, JavaScript, JSP
+Backend: Java, Spring Security, Spring Boot, MyBatis, JPA
+Database: Oracle
 Version Control: GitHub
-Tools: IntelliJ / Eclipse, Postman, Figma 등
+Tools: IntelliJ / Eclipse, VSCode
