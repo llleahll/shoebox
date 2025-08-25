@@ -2,23 +2,25 @@
 
 > 온라인 신발 쇼핑몰을 위한 **Full-stack 웹 애플리케이션**  
 > 사용자 친화적인 UI와 안정적인 백엔드 아키텍처를 통해  
-> 상품 검색부터 결제까지 원활한 경험을 제공하는 프로젝트입니다.
+> 상품 검색부터 결제까지 원활한 경험을 제공하며,
+상품·회원·주문을 관리할 수 있는 관리자 페이지도 포함된 프로젝트입니다.
 
 ---
 
 ## ✨ 프로젝트 개요
-- **프로젝트 기간**: 2025.03 ~ 2025.04 (약 4주)
-- **개발 형태**: 팀 프로젝트 (4인)
-- **역할**: 프론트엔드 & 백엔드 주요 기능 개발, DB 설계, UI/UX 기획 참여
+- **프로젝트 기간**: 2025.05.12 ~ 2025.05.23 (2주)
+- **개발 형태**: 팀 프로젝트 (8인)
+- **담당 업무**: 프론트엔드 메인 페이지, 관리자 페이지 프론트& 백엔드 회원관리 기능 개발, UI/UX 기획 참여
 
 ---
 
-## 🔧 기술 스택
-- **Frontend**: Thymeleaf, HTML5, CSS3, JavaScript
-- **Backend**: Java, Spring Security, Spring Boot, MyBatis, JPA
-- **Database**: Oracle
-- **Version Control**: GitHub, Git Flow 
-- **Tools**: IntelliJ / Eclipse / VSCode, Gradle
+## 🔧 기술 스택 & 개발 환경
+- **Frontend**: Thymeleaf, HTML5, CSS3, JavaScript  
+- **Backend**: Java (JDK 17), Spring Boot 3.4.5, Spring Security, MyBatis, JPA  
+- **Database**: Oracle XE 18c, 공공 API  
+- **Version Control**: GitHub, Git Flow  
+- **Tools & IDE**: IntelliJ IDEA, STS4, Eclipse, VS Code, Gradle, SQL Developer, Figma, Photoshop  
+- **OS**: Windows 11
 
 ---
 
@@ -81,6 +83,28 @@ shoebox/
 ├── shoebox_DDL.sql  # DB 테이블 생성 스크립트
 └── build.gradle
 ```
+---
+## 🚀 실행 방법
+
+### 1. DB 세팅
+- Oracle 설치 후 `shoebox_DDL.sql` 실행
+
+### 2. 프로젝트 열기
+- STS4 또는 IntelliJ에서 **Gradle 프로젝트**로 Import
+
+### 3. 환경 설정
+- `application.yml`에서 DB 접속 정보, 포트, 보안 옵션 수정
+
+### 4. 서버 구동
+- `ShoeboxApplication.java` 실행  
+  또는  
+  ```bash
+  ./gradlew bootRun
+  ```
+### 5. 접속 주소
+- 사용자: http://localhost:8090/main/
+- 관리자: http://localhost:8090/admin/
+
 
 
 
