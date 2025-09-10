@@ -159,7 +159,31 @@ shoebox/
 ### 5. 접속 주소
 - 사용자: http://localhost:8090/main/
 - 관리자: http://localhost:8090/admin/
+  
+---
+## 🛠️ Troubleshooting (메인 Frontend)
 
+### 1️⃣ 상품 옵션 선택 시 레이아웃 깨짐
+- **문제**: 사이즈 선택 후 옵션 영역이 추가될 때 레이아웃이 무너짐  
+- **원인**: CSS `display` 속성과 JS `innerHTML` 사용으로 flex 스타일 초기화  
+- **해결**:  
+  - `selected-size-info`에 고정 flex 스타일 적용  
+  - `innerHTML` 대신 `appendChild` 사용으로 DOM 구조 유지  
+
+
+### 2️⃣ 총 결제 금액 표시 오류
+- **문제**: 수량 변경 시 총 금액이 반영되지 않음  
+- **원인**: 숫자 포맷(쉼표 포함) 파싱 실패, `updateTotal()` 미호출  
+- **해결**:  
+  - 이벤트마다 `updateTotal()` 강제 호출  
+  - `parseInt(price.replace(/[^0-9]/g, ''))`로 숫자만 추출  
+
+
+### 3️⃣ 버튼 클릭 UX 개선
+- **문제**: 장바구니/구매 버튼 클릭 시 선택 상품이 없으면 반응 없음  
+- **해결**:  
+  - 조건문으로 예외 처리 → `alert` 메시지 출력  
+  - 잘못된 요청 차단, 사용자 경험 개선  
 
 ## 🔧 Troubleshooting (관리자)
 
@@ -188,29 +212,6 @@ shoebox/
 
 
 
-## 🛠️ Troubleshooting (메인 Frontend)
-
-### 1️⃣ 상품 옵션 선택 시 레이아웃 깨짐
-- **문제**: 사이즈 선택 후 옵션 영역이 추가될 때 레이아웃이 무너짐  
-- **원인**: CSS `display` 속성과 JS `innerHTML` 사용으로 flex 스타일 초기화  
-- **해결**:  
-  - `selected-size-info`에 고정 flex 스타일 적용  
-  - `innerHTML` 대신 `appendChild` 사용으로 DOM 구조 유지  
-
-
-### 2️⃣ 총 결제 금액 표시 오류
-- **문제**: 수량 변경 시 총 금액이 반영되지 않음  
-- **원인**: 숫자 포맷(쉼표 포함) 파싱 실패, `updateTotal()` 미호출  
-- **해결**:  
-  - 이벤트마다 `updateTotal()` 강제 호출  
-  - `parseInt(price.replace(/[^0-9]/g, ''))`로 숫자만 추출  
-
-
-### 3️⃣ 버튼 클릭 UX 개선
-- **문제**: 장바구니/구매 버튼 클릭 시 선택 상품이 없으면 반응 없음  
-- **해결**:  
-  - 조건문으로 예외 처리 → `alert` 메시지 출력  
-  - 잘못된 요청 차단, 사용자 경험 개선  
 
 
 
