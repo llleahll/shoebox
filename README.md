@@ -19,7 +19,7 @@
 - **Backend**: Java (JDK 17), Spring Boot 3.4.5, Spring Security, MyBatis, JPA  
 - **Database**: Oracle XE 18c, 공공 API  
 - **Version Control**: GitHub, Git Flow  
-- **Tools & IDE**: IntelliJ IDEA, STS4, Eclipse, VS Code, Gradle, SQL Developer, Figma, Photoshop  
+- **Tools & IDE**: IntelliJ IDEA, STS4, Eclipse, VS Code, Gradle, SQL Developer, Figma, Photoshop
 - **OS**: Windows 11
 
 ---
@@ -61,7 +61,62 @@
 - Q&A 및 1:1 문의 답변 관리  
 - 매출/회원 통계 대시보드 제공  
 
+---
 
+## 💻 실행 화면
+
+
+### 🛍️ 메인 서비스
+- 메인 → 상품 상세 → 장바구니 → 결제 → 주문 완료  
+<img src="https://github.com/user-attachments/assets/a547ed64-264c-427d-a347-66fa102a9999" width="800" alt="전체 서비스 흐름">
+
+---
+
+### 🛠️ 담당 화면 (메인 Frontend + 관리자 Frontend + Backend)
+
+#### 1️⃣ 카테고리 페이지
+<img src="https://github.com/user-attachments/assets/061d1578-44de-4111-8efa-79f9ad1dea5e" width="800" alt="카테고리 페이지">
+
+- 상품 필터, 정렬, 리스트 구현
+- CSS 및 레이아웃 조정으로 화면 깨짐 방지
+
+#### 2️⃣ 상품 상세 페이지
+<img src="https://github.com/user-attachments/assets/d59eccd1-3795-4796-808d-dc4b8444e30a" width="800" alt="상품 상세 페이지">
+
+- 사이즈/수량 선택 시 DOM 동적 생성  
+- 총 결제 금액 자동 계산 기능 구현  
+- CSS 조정으로 옵션 영역 추가 시 레이아웃 유지
+
+#### 3️⃣ 장바구니 페이지
+<img src="https://github.com/user-attachments/assets/e2e32c83-9955-4785-989a-ee0785091e62" width="800" alt="장바구니 페이지">
+
+- 선택 상품 담기/삭제/수량 변경 기능 구현  
+- 총 결제 금액 실시간 계산
+
+#### 4️⃣ 주문 페이지
+<img src="https://github.com/user-attachments/assets/0cfbefb6-4fc0-4a97-a463-118e9a113fbc" width="800" alt="주문 페이지">
+
+- 주문 정보 전송 및 결제 로직 연동  
+- 사용자 입력 검증 및 오류 처리
+
+#### 5️⃣ 주문 완료 페이지
+<img src="https://github.com/user-attachments/assets/1f4fce9a-91ce-44e2-8e8d-88081d8010ba" width="800" alt="주문 완료 페이지">
+
+- 주문 내역 요약, 결제 상태 표시
+
+#### 6️⃣ 아이디 찾기 페이지
+<img src="https://github.com/user-attachments/assets/491aa194-0be6-463b-9d73-4c09f4bc2ded" width="800" alt="아이디 찾기 페이지">
+
+- 입력 검증 및 결과 표시 기능 구현
+
+#### 7️⃣ 관리자 회원 관리
+
+<img src="https://github.com/user-attachments/assets/3a86c42f-4bb1-4f04-8609-17cd93ec142c" width="800" alt="관리자 검색">
+<img src="https://github.com/user-attachments/assets/495f8589-c0f7-4e68-918e-0087e28af089" width="800" alt="회원 정보 수정">
+<img src="https://github.com/user-attachments/assets/e468ac09-5240-448c-a759-85a57ba39440" width="800" alt="회원 상세 페이지">
+
+- 회원 검색 기능 구현 (이름/아이디/연락처)  
+- 회원 정보 수정 및 상세 페이지 구성
 
 ---
 
@@ -104,6 +159,59 @@ shoebox/
 ### 5. 접속 주소
 - 사용자: http://localhost:8090/main/
 - 관리자: http://localhost:8090/admin/
+
+
+## 🔧 Troubleshooting (관리자)
+
+### 1️⃣ 500 Internal Server Error
+- **문제**: 일부 회원 페이지 접근 시 서버 오류  
+- **원인**: Controller에서 `Optional.get()` 호출 시 데이터 미존재  
+- **해결**: `Optional.orElseThrow()`로 null 안전 처리 및 @ControllerAdvice로 예외 공통 처리  
+
+
+### 2️⃣ DB 연결 문제
+- **문제**: 주문/회원 조회 시 데이터가 화면에 표시되지 않음  
+- **원인**: `application.yml`의 Oracle 접속 정보 오타, 테이블 데이터 누락  
+- **해결**: DB 접속 정보 수정, 테이블 생성 스크립트(shoebox_DDL.sql) 적용, HikariCP 로그 확인  
+
+
+### 3️⃣ Thymeleaf 렌더링 오류
+- **문제**: 상세페이지, 마이페이지 일부 뷰가 로드되지 않음  
+- **원인**: 모델 객체 미전달 또는 뷰 파일 경로 불일치  
+- **해결**: Controller에서 Model에 DTO 전달, 템플릿 파일(user/detail.html 등)과 경로/변수명 일치 확인  
+
+
+### 4️⃣ 정적 리소스 캐싱 문제
+- **문제**: CSS/JS 수정 후 브라우저에서 갱신되지 않음  
+- **원인**: 브라우저 캐시, Spring Boot 기본 리소스 캐시  
+- **해결**: `spring.web.resources.cache.period=0` 설정, 개발환경에서만 적용
+
+
+
+## 🛠️ Troubleshooting (메인 Frontend)
+
+### 1️⃣ 상품 옵션 선택 시 레이아웃 깨짐
+- **문제**: 사이즈 선택 후 옵션 영역이 추가될 때 레이아웃이 무너짐  
+- **원인**: CSS `display` 속성과 JS `innerHTML` 사용으로 flex 스타일 초기화  
+- **해결**:  
+  - `selected-size-info`에 고정 flex 스타일 적용  
+  - `innerHTML` 대신 `appendChild` 사용으로 DOM 구조 유지  
+
+
+### 2️⃣ 총 결제 금액 표시 오류
+- **문제**: 수량 변경 시 총 금액이 반영되지 않음  
+- **원인**: 숫자 포맷(쉼표 포함) 파싱 실패, `updateTotal()` 미호출  
+- **해결**:  
+  - 이벤트마다 `updateTotal()` 강제 호출  
+  - `parseInt(price.replace(/[^0-9]/g, ''))`로 숫자만 추출  
+
+
+### 3️⃣ 버튼 클릭 UX 개선
+- **문제**: 장바구니/구매 버튼 클릭 시 선택 상품이 없으면 반응 없음  
+- **해결**:  
+  - 조건문으로 예외 처리 → `alert` 메시지 출력  
+  - 잘못된 요청 차단, 사용자 경험 개선  
+
 
 
 
