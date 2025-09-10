@@ -72,7 +72,7 @@
 
 ---
 
-### 🛠️ 담당 화면 (메인 Frontend + 관리자 Frontend + Backend)
+### 🛠️ ⭐ 담당 화면 (메인 Frontend + 관리자 Frontend + Backend)
 
 #### 1️⃣ 카테고리 페이지
 <img src="https://github.com/user-attachments/assets/061d1578-44de-4111-8efa-79f9ad1dea5e" width="800" alt="카테고리 페이지">
